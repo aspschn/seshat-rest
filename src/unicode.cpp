@@ -153,32 +153,115 @@ int properties(char **paths, int len)
         // ============================
         //
         res["properties"]["binary"] = {
+        // ASCII_Hex_Digit
+            { "ascii_hex_digit", unicode::ascii_hex_digit(cp) },
+        // Alphabetic
+        // Bidi_Control
+            { "bidi_control", unicode::bidi_control(cp) },
+        // Bidi_Mirrored
         // Cased
             { "cased", unicode::cased(cp) },
+        // Composition_Exclusion
         // Case_Ignorable
             { "case_ignorable", unicode::case_ignorable(cp) },
         // Full_Composition_Exclusion
             { "full_composition_exclusion", unicode::comp_ex(cp) },
+        // Changes_When_Casefolded
+        // Changes_When_Casemapped
+        // Changes_When_NFKC_Casefolded
+        // Changes_When_Lowercased
+        // Changes_When_Titlecased
+        // Changes_When_Uppercased
+        // Dash
+            { "dash", unicode::dash(cp) },
+        // Deprecated
+            { "deprecated", unicode::deprecated(cp) },
         // Default_Ignorable_Code_Point
             {
                 "default_ignorable_code_point", 
                 unicode::default_ignorable_code_point(cp)
             },
+        // Diacritic
+            { "diacritic", unicode::diacritic(cp) },
+        // Extender
+            { "extender", unicode::extender(cp) },
+        // Grapheme_Base
         // Grapheme_Extend
             { "grapheme_extend", unicode::grapheme_extend(cp) },
+        // Grapheme_Link
+        // Hex_Digit
+            { "hex_digit", unicode::hex_digit(cp) },
+        // Hyphen
+            { "hyphen", unicode::hyphen(cp) },
+        // ID_Continue
+        // Ideographic
+            { "ideographic", unicode::ideographic(cp) },
+        // ID_Start
+        // IDS_Binary_Operator
+            { "ids_binary_operator", unicode::ids_binary_operator(cp) },
+        // IDS_Trinary_Operator
+            { "ids_trinary_operator", unicode::ids_trinary_operator(cp) },
+        // Join_Control
+            { "join_control", unicode::join_control(cp) },
+        // Logical_Order_Exception
+            { "logical_order_exception", unicode::logical_order_exception(cp) },
         // Lowercase
             { "lowercase", unicode::lowercase(cp) },
+        // Math
+            // { "math", unicode::math(cp) },
+        // Noncharacter_Code_Point
+            { "noncharacter_code_point", unicode::nchar(cp) },
+        // Other_Alphabetic
+            { "other_alphabetic", unicode::oalpha(cp) },
+        // Other_Default_Ignorable_Code_Point
+            { "other_default_ignorable_code_point", unicode::odi(cp) },
+        // Other_Grapheme_Extend
+            { "other_grapheme_extend", unicode::ogr_ext(cp) },
+        // Other_ID_Continue
+            { "other_id_continue", unicode::oidc(cp) },
+        // Other_ID_Start
+            { "other_id_start", unicode::oids(cp) },
+        // Other_Lowercase
+            { "other_lowercase", unicode::other_lowercase(cp) },
+        // Other_Math
+            { "other_math", unicode::other_math(cp) },
+        // Other_Uppercase
+            { "other_uppercase", unicode::other_uppercase(cp) },
+        // Pattern_Syntax
+            { "pattern_syntax", unicode::pattern_syntax(cp) },
+        // Pattern_White_Space
+            { "pattern_white_space", unicode::pattern_white_space(cp) },
         // Prepended_Concatenation_Mark
             {
                 "prepended_concatenation_mark",
                 unicode::prepended_concatenation_mark(cp)
             },
+        // Quotation_Mark
+            { "quotation_mark", unicode::quotation_mark(cp) },
+        // Regional_Indicator
+            { "regional_indicator", unicode::regional_indicator(cp) },
+        // Radical
+            { "radical", unicode::radical(cp) },
+        // Soft_Dotted
+            { "soft_dotted", unicode::soft_dotted(cp) },
+        // Sentence_Terminal
+            { "sentence_terminal", unicode::sentence_terminal(cp) },
+        // Terminal_Punctuation
+            { "terminal_punctuation", unicode::terminal_punctuation(cp) },
+        // Unified_Ideograph
+            { "unified_ideograph", unicode::unified_ideograph(cp) },
         // Uppercase
             { "uppercase", unicode::uppercase(cp) },
         // Variation_Selector
             { "variation_selector", unicode::variation_selector(cp) },
         // White_Space
             { "white_space", unicode::white_space(cp) },
+        // XID_Continue
+        // XID_Start
+        // Expands_On_NFC
+        // Expands_On_NFD
+        // Expands_On_NFKC
+        // Expands_On_NFKD
         };
 
         // Send response.

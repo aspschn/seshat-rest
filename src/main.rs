@@ -11,6 +11,10 @@ use rocket::request::Request;
 use rocket::response;
 use rocket::response::{Responder, Response};
 use rocket_contrib::json::{Json, JsonValue};
+use seshat::unicode::CodePoint;
+
+mod properties_api;
+use crate::properties_api::properties_api;
 
 
 #[derive(Debug)]
@@ -61,8 +65,10 @@ fn properties(cp: String) -> ApiResponse {
                     status: Status::NotFound,
                 };
             }
+            let codepoint = CodePoint::new(val).unwrap();
             ApiResponse {
-                json: json!({"message": "Ok"}),
+                // json: json!({"message": "Ok"}),
+                json: properties_api(codepoint),
                 status: Status::Ok,
             }
         },

@@ -1,7 +1,7 @@
-#![feature(proc_macro_hygiene, decl_macro)]
+// #![feature(proc_macro_hygiene, decl_macro)]
 
 #[macro_use] extern crate rocket;
-#[macro_use] extern crate rocket_contrib;
+// #[macro_use] extern crate rocket_contrib;
 extern crate serde;
 #[macro_use] extern crate serde_derive;
 extern crate serde_json;
@@ -10,7 +10,8 @@ use rocket::http::{ContentType, Status};
 use rocket::request::Request;
 use rocket::response;
 use rocket::response::{Responder, Response};
-use rocket_contrib::json::{Json, JsonValue};
+use rocket::serde::json;
+use rocket::serde::json::{json, Json};
 use seshat::unicode::CodePoint;
 
 mod properties_api;
@@ -19,12 +20,12 @@ use crate::properties_api::properties_api;
 
 #[derive(Debug)]
 struct ApiResponse {
-    json: JsonValue,
+    json: json::Value,
     status: Status,
 }
 
-impl<'r> Responder<'r> for ApiResponse {
-    fn respond_to(self, req: &Request) -> response::Result<'r> {
+impl<'r> Responder<'r, 'static> for ApiResponse {
+    fn respond_to(self, req: &Request) -> response::Result<'static> {
         Response::build_from(self.json.respond_to(&req).unwrap())
             .status(self.status)
             .header(ContentType::JSON)
@@ -53,7 +54,7 @@ fn echo(num: String) -> ApiResponse {
     }
 }
 
-#[get("/api/unicode/properties/<cp>")]
+#[get("/api/v2/unicode/properties/<cp>")]
 fn properties(cp: String) -> ApiResponse {
     let cp = format!("{}", cp);
     let cp = u32::from_str_radix(&cp, 16);
@@ -81,6 +82,7 @@ fn properties(cp: String) -> ApiResponse {
     }
 }
 
-fn main() {
-    rocket::ignite().mount("/", routes![hello, properties]).launch();
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/", routes![hello, properties])
 }

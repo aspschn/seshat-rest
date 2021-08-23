@@ -1,10 +1,10 @@
 extern crate serde_json;
 
-use rocket_contrib::json::{JsonValue};
+use rocket::serde::json::{json, Value};
 use seshat::unicode::{CodePoint, Ucd};
 use seshat::unicode::props::UnicodeProperty;
 
-pub fn properties_api(cp: CodePoint) -> JsonValue {
+pub fn properties_api(cp: CodePoint) -> Value {
     json!({"codepoint": format!("{}", cp),
         "properties": {
             "numeric": {

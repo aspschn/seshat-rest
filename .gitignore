@@ -3,3 +3,4 @@ cgi-bin/seshat-rest
 libs/libyuarel
 nohup.out
 target/
+dist/seshat-rest

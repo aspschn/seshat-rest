@@ -1,4 +1,5 @@
 // #![feature(proc_macro_hygiene, decl_macro)]
+#![recursion_limit="512"]
 
 #[macro_use] extern crate rocket;
 // #[macro_use] extern crate rocket_contrib;
@@ -6,17 +7,33 @@ extern crate serde;
 #[macro_use] extern crate serde_derive;
 extern crate serde_json;
 
-use rocket::http::{ContentType, Status};
+use rocket::http::{ContentType, Status, Header};
 use rocket::request::Request;
 use rocket::response;
 use rocket::response::{Responder, Response};
+use rocket::fairing::{Fairing, Info, Kind};
 use rocket::serde::json;
-use rocket::serde::json::{json, Json};
+use rocket::serde::json::{json};
 use seshat::unicode::CodePoint;
 
 mod properties_api;
 use crate::properties_api::properties_api;
 
+pub struct Cors;
+
+#[rocket::async_trait]
+impl Fairing for Cors {
+    fn info(&self) -> Info {
+        Info {
+            name: "Add CORS headers to responses",
+            kind: Kind::Response,
+        }
+    }
+
+    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
+        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
+    }
+}
 
 #[derive(Debug)]
 struct ApiResponse {
@@ -84,5 +101,5 @@ fn properties(cp: String) -> ApiResponse {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello, properties])
+    rocket::build().mount("/", routes![hello, properties]).attach(Cors)
 }

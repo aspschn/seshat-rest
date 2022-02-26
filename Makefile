@@ -11,4 +11,5 @@ run:
 	nohup spawn-fcgi -n -f /home/ubuntu/app/seshat-demo/api/cgi-bin/seshat-rest -a 0.0.0.0 -p 8000 &
 
 run-rocket:
-	ROCKET_PORT=8001 ROCKET_LOG_LEVEL=critical nohup dist/seshat-rest &
+	cargo build --release
+	ROCKET_PORT=8001 ROCKET_LOG_LEVEL=critical nohup target/release/seshat-rest &

@@ -10,7 +10,7 @@ keywords = ["unicode"]
 edition = "2018"
 
 [dependencies]
-seshat-unicode = "0.0.14"
+seshat-unicode = "0.0.15"
 rocket = { version = "0.5.0-rc.1", features = ["json"] }
 serde = "1.0.125"
 serde_derive = "1.0.125"

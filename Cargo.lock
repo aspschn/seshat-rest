@@ -1007,9 +1007,9 @@ dependencies = [
 
 [[package]]
 name = "seshat-unicode"
-version = "0.0.14"
+version = "0.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f4885ee09aab31a24a91818fcdefedc3a0737d96c242d8b0457cecfb54869c1"
+checksum = "46cf016eb4f844da93d8b796bc7c4727a79294a92450096290060701d6e75331"
 dependencies = [
  "num",
 ]

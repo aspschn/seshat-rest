@@ -88,5 +88,5 @@ pub fn properties_api(cp: CodePoint) -> Value {
                 "white_space": cp.wspace(),
             },
         },
-        "seshat_version": "0.0.14"})
+        "seshat_version": "0.0.15"})
 }

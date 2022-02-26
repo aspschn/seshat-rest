@@ -18,6 +18,8 @@ use seshat::unicode::CodePoint;
 
 mod properties_api;
 use crate::properties_api::properties_api;
+mod segmentation_api;
+use crate::segmentation_api::segmentation_graphemes_api;
 
 pub struct Cors;
 
@@ -99,7 +101,15 @@ fn properties(cp: String) -> ApiResponse {
     }
 }
 
+#[get("/api/v2/unicode/segmentation/graphemes/<text>")]
+fn segmentation_grapheme(text: String) -> ApiResponse {
+    ApiResponse {
+        json: segmentation_graphemes_api(text),
+        status: Status::Ok,
+    }
+}
+
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello, properties]).attach(Cors)
+    rocket::build().mount("/", routes![hello, properties, segmentation_grapheme]).attach(Cors)
 }

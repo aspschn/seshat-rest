@@ -4,7 +4,7 @@ Seshat Web Demo REST API
 Properties
 -----------
 
-/api/unicode/properties/\<codepoint\>
+/api/v2/unicode/properties/\<codepoint\>
 
 ### response example
 ```
@@ -42,7 +42,7 @@ Properties
 
 Segmentation
 ------------
-/api/unicode/segmentation/grapheme/\<example text here\>
+/api/v2/unicode/segmentation/graphemes/\<example text here\>
 
 ### response example
 `

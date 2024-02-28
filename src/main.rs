@@ -13,11 +13,15 @@ use rocket::response;
 use rocket::response::{Responder, Response};
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::serde::json;
-use rocket::serde::json::{json};
+use serde_json::json;
 use seshat::unicode::CodePoint;
 
+mod browse_api;
+use crate::browse_api::browse_blocks_api_v3;
+use crate::browse_api::browse_blocks_block_api_v3;
 mod properties_api;
 use crate::properties_api::properties_api;
+use crate::properties_api::properties_api_v3;
 mod segmentation_api;
 use crate::segmentation_api::segmentation_graphemes_api;
 
@@ -109,7 +113,61 @@ fn segmentation_grapheme(text: String) -> ApiResponse {
     }
 }
 
+#[get("/api/v3/unicode/browse/blocks")]
+fn browse_blocks_v3() -> ApiResponse {
+    ApiResponse {
+        json: browse_blocks_api_v3(),
+        status: Status::Ok,
+    }
+}
+
+#[get("/api/v3/unicode/browse/blocks/<block>")]
+fn browse_blocks_block_v3(block: String) -> ApiResponse {
+    ApiResponse {
+        json: browse_blocks_block_api_v3(block),
+        status: Status::Ok,
+    }
+}
+
+#[get("/api/v3/unicode/properties/<cp>")]
+fn properties_v3(cp: String) -> ApiResponse {
+    let as_u32 = u32::from_str_radix(&cp, 16);
+    match as_u32 {
+        Ok(val) => {
+            let code_point = CodePoint::new(val);
+            match code_point {
+                Ok(code_point) => {
+                    ApiResponse {
+                        json: properties_api_v3(code_point),
+                        status: Status::Ok,
+                    }
+                },
+                Err(e) => {
+                    ApiResponse {
+                        json: json!({"message": e}),
+                        status: Status::NotFound,
+                    }
+                },
+            }
+        },
+        Err(e) => {
+            ApiResponse {
+                json: json!({"message": format!("{}", e)}),
+                status: Status::BadRequest,
+            }
+        },
+    }
+}
+
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello, properties, segmentation_grapheme]).attach(Cors)
+    let route_list = routes![
+        hello,
+        properties,
+        browse_blocks_v3,
+        browse_blocks_block_v3,
+        properties_v3,
+        segmentation_grapheme,
+    ];
+    rocket::build().mount("/", route_list).attach(Cors)
 }

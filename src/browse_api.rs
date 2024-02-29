@@ -353,14 +353,12 @@ pub fn browse_blocks_api_v3() -> Value {
         }
 
         json!({
-            "block": {
-                "property_name": {
-                    "full": x.property_value_name().full,
-                    "abbr": x.property_value_name().abbr,
-                },
-                "range_begin": CodePoint::new(begin).unwrap().to_string(),
-                "range_end": CodePoint::new(end).unwrap().to_string(),
+            "property_name": {
+                "full": x.property_value_name().full,
+                "abbr": x.property_value_name().abbr,
             },
+            "range_begin": CodePoint::new(begin).unwrap().to_string(),
+            "range_end": CodePoint::new(end).unwrap().to_string(),
         })
     }).collect();
 

@@ -16,6 +16,7 @@ use rocket::serde::json;
 use serde_json::json;
 use seshat::unicode::CodePoint;
 
+mod versions;
 mod browse_api;
 use crate::browse_api::browse_blocks_api_v3;
 use crate::browse_api::browse_blocks_block_api_v3;

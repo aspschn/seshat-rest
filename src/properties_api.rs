@@ -6,6 +6,8 @@ use seshat::unicode::{CodePoint, Ucd};
 use seshat::unicode::props::UnicodeProperty;
 use seshat::unicode::props::PropertyName;
 use seshat::unicode::props::BinaryProperty;
+use seshat::unicode::UNICODE_VERSION;
+use crate::versions::SESHAT_VERSION;
 
 
 /// Property name struct with a helper class.
@@ -149,7 +151,8 @@ pub fn properties_api(cp: CodePoint) -> Value {
 pub fn properties_api_v3(cp: CodePoint) -> Value {
     json!({
         "code_point": format!("{}", cp),
-        "seshat_version": "0.2.1",
+        "unicode_version": UNICODE_VERSION.to_string(),
+        "seshat_version": SESHAT_VERSION,
         "properties": {
             "numeric": [
                 {

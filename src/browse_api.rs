@@ -2,8 +2,10 @@ use serde_json::{json, Value};
 use seshat::unicode::CodePoint;
 use seshat::unicode::Ucd;
 use seshat::unicode::props::Blk;
-use seshat::unicode::props::PropertyName;
+// use seshat::unicode::props::PropertyName;
 use seshat::unicode::props::UnicodeProperty;
+use seshat::unicode::UNICODE_VERSION;
+use crate::versions::SESHAT_VERSION;
 
 
 pub fn browse_blocks_api_v3() -> Value {
@@ -363,7 +365,8 @@ pub fn browse_blocks_api_v3() -> Value {
     }).collect();
 
     json!({
-        "seshat_version": "0.2.1",
+        "unicode_version": UNICODE_VERSION.to_string(),
+        "seshat_version": SESHAT_VERSION,
         "blocks": blocks,
     })
 }
@@ -1042,7 +1045,8 @@ pub fn browse_blocks_block_api_v3(block: String) -> Value {
     }
 
     json!({
-        "seshat_version": "0.2.1",
+        "unicode_version": UNICODE_VERSION.to_string(),
+        "seshat_version": SESHAT_VERSION,
         "code_points": code_points,
         "range_begin": code_points.first(),
         "range_end": code_points.last(),

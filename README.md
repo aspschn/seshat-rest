@@ -1,8 +1,31 @@
 Seshat Web Demo REST API
 ========================
 
-Properties
------------
+## Browse
+
+### Browse Blocks
+
+**GET** `/api/v3/unicode/browse/blocks`
+
+
+### Browse the Code Points in the Block
+
+**GET** `/api/v3/unicode/browse/blocks/<block>`
+
+`<block>` is an abbreviated name.
+
+
+## Properties
+
+### Get Properties
+
+**GET** `/api/v3/unicode/properties/<code_point>`
+
+`<code_point>` is a Unicode character code notation without "U+".
+The valid range is from 0000 to 10FFFF.
+
+
+## Properties (v2)
 
 /api/v2/unicode/properties/\<codepoint\>
 
@@ -40,8 +63,8 @@ Properties
 }
 ```
 
-Segmentation
-------------
+## Segmentation (v2)
+
 /api/v2/unicode/segmentation/graphemes/\<example text here\>
 
 ### response example

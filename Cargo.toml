@@ -1,16 +1,16 @@
 [package]
 name = "seshat-rest"
 version = "0.0.1"
-authors = ["Aspen Schneider <hardboiled65@gmail.com>"]
+authors = ["Aspen Schneider <rendezvous71@outlook.com>"]
 description = "Seshat REST API server"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/hardboiled65/seshat-rest"
+repository = "https://github.com/aspschn/seshat-rest"
 keywords = ["unicode"]
 edition = "2018"
 
 [dependencies]
-seshat-unicode = "0.2.1"
+seshat-unicode = "0.3.1"
 rocket = { version = "0.5.0", features = ["json"] }
 serde = "1.0.125"
 serde_derive = "1.0.125"

@@ -1,1 +1,1 @@
-pub const SESHAT_VERSION: &str = "0.2.1";
+pub const SESHAT_VERSION: &str = "0.3.1";

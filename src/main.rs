@@ -25,6 +25,7 @@ use crate::properties_api::properties_api;
 use crate::properties_api::properties_api_v3;
 mod segmentation_api;
 use crate::segmentation_api::segmentation_graphemes_api;
+use crate::segmentation_api::segmentation_grapheme_api_v3;
 
 pub struct Cors;
 
@@ -160,6 +161,14 @@ fn properties_v3(cp: String) -> ApiResponse {
     }
 }
 
+#[get("/api/v3/unicode/segmentation/grapheme/<text>")]
+fn segmentation_grapheme_v3(text: String) -> ApiResponse {
+    ApiResponse {
+        json: segmentation_grapheme_api_v3(text),
+        status: Status::Ok,
+    }
+}
+
 #[launch]
 fn rocket() -> _ {
     let route_list = routes![
@@ -168,6 +177,7 @@ fn rocket() -> _ {
         browse_blocks_v3,
         browse_blocks_block_v3,
         properties_v3,
+        segmentation_grapheme_v3,
         segmentation_grapheme,
     ];
     rocket::build().mount("/", route_list).attach(Cors)

@@ -4,3 +4,5 @@ libs/libyuarel
 nohup.out
 target/
 dist/seshat-rest
+
+.idea

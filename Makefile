@@ -13,3 +13,7 @@ run:
 run-rocket:
 	cargo build --release
 	ROCKET_PORT=8001 ROCKET_LOG_LEVEL=critical nohup target/release/seshat-rest &
+
+build-musl:
+	cargo build --release --target x86_64-unknown-linux-musl
+

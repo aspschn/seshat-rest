@@ -27,6 +27,10 @@ mod segmentation_api;
 use crate::segmentation_api::segmentation_graphemes_api;
 use crate::segmentation_api::segmentation_grapheme_api_v3;
 
+mod normalization_api;
+use crate::normalization_api::NormalizationForm;
+use crate::normalization_api::normalization_api;
+
 pub struct Cors;
 
 #[rocket::async_trait]
@@ -169,6 +173,38 @@ fn segmentation_grapheme_v3(text: String) -> ApiResponse {
     }
 }
 
+#[get("/api/v3/unicode/normalization/nfd/<text>")]
+fn normalization_nfd_v3(text: String) -> ApiResponse {
+    ApiResponse {
+        json: normalization_api(text, NormalizationForm::Nfd),
+        status: Status::Ok,
+    }
+}
+
+#[get("/api/v3/unicode/normalization/nfc/<text>")]
+fn normalization_nfc_v3(text: String) -> ApiResponse {
+    ApiResponse {
+        json: normalization_api(text, NormalizationForm::Nfc),
+        status: Status::Ok,
+    }
+}
+
+#[get("/api/v3/unicode/normalization/nfkd/<text>")]
+fn normalization_nfkd_v3(text: String) -> ApiResponse {
+    ApiResponse {
+        json: normalization_api(text, NormalizationForm::Nfkd),
+        status: Status::Ok,
+    }
+}
+
+#[get("/api/v3/unicode/normalization/nfkc/<text>")]
+fn normalization_nfkc_v3(text: String) -> ApiResponse {
+    ApiResponse {
+        json: normalization_api(text, NormalizationForm::Nfkc),
+        status: Status::Ok,
+    }
+}
+
 #[launch]
 fn rocket() -> _ {
     let route_list = routes![
@@ -179,6 +215,10 @@ fn rocket() -> _ {
         properties_v3,
         segmentation_grapheme_v3,
         segmentation_grapheme,
+        normalization_nfd_v3,
+        normalization_nfc_v3,
+        normalization_nfkd_v3,
+        normalization_nfkc_v3,
     ];
     rocket::build().mount("/", route_list).attach(Cors)
 }
